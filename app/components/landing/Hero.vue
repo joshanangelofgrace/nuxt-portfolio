@@ -10,9 +10,11 @@ defineProps<{
 
 <template>
   <UPageHero
+    class="-mt-16"
+    :orientation="'horizontal'"
     :ui="{
-      headline: 'flex items-center justify-center',
-      title: 'text-shadow-md max-w-lg mx-auto',
+      headline: 'flex text-4xl',
+      title: 'text-shadow-md max-w-xl mx-auto lg:text-6xl',
       links: 'mt-4 flex-col justify-center items-center'
     }"
   >
@@ -32,13 +34,13 @@ defineProps<{
           duration: 0.6,
           delay: 0.1
         }"
-      >
-        <UColorModeAvatar
-          class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
+      > Meet
+        <!-- <UColorModeAvatar
+          class="size-18 ring ring-default ring-offset-3 ring-offset-bg"
           :light="global.picture?.light!"
           :dark="global.picture?.dark!"
           :alt="global.picture?.alt!"
-        />
+        /> -->
       </Motion>
     </template>
 
@@ -56,7 +58,7 @@ defineProps<{
         }"
         :transition="{
           duration: 0.6,
-          delay: 0.1
+          delay: 0.2
         }"
       >
         {{ page.title }}
@@ -156,7 +158,25 @@ defineProps<{
       </div>
     </template>
 
-    <UMarquee
+    <Motion
+      :initial="{
+        scale: 1.1,
+        opacity: 0,
+        filter: 'blur(20px)'
+      }"
+      :animate="{
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)'
+      }"
+      :transition="{
+        duration: 0.6,
+        delay: 0.1
+      }"
+    >
+      <NuxtImg src="/FLW_5740-1.webp" />
+    </Motion>
+    <!-- <UMarquee
       pause-on-hover
       class="py-2 -mx-8 sm:-mx-12 lg:-mx-16 [--duration:40s]"
     >
@@ -186,6 +206,6 @@ defineProps<{
           v-bind="img"
         />
       </Motion>
-    </UMarquee>
+    </UMarquee> -->
   </UPageHero>
 </template>
