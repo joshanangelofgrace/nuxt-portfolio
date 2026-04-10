@@ -4,9 +4,9 @@
 <template>
   <div>
     <div class="">
-      <!-- <AppHeader :links="navLinks" /> -->
+      <AppHeader :links="navLinks" />
       <slot />
-      <AppFooter />
+      <!-- <AppFooter /> -->
     </div>
   </div>
 </template>

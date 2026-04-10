@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import ScrollBackground from '~/components/landing/ScrollBackground.vue'
-
 const { data: page } = await useAsyncData('index', () => {
   return queryCollection('index').first()
 })
@@ -23,6 +21,7 @@ useSeoMeta({
 <template>
   <UPage v-if="page">
     <LandingHero :page />
+    <!-- <LandingBlog :page /> -->
     <!-- <UPageSection
       :ui="{
         container: '!pt-0 lg:grid lg:grid-cols-2 lg:gap-8'
@@ -35,8 +34,8 @@ useSeoMeta({
     <LandingTestimonials :page />
     <LandingFAQ :page /> -->
 
-    <ClientOnly>
+    <!-- <ClientOnly>
       <ScrollBackground />
-    </ClientOnly>
+    </ClientOnly> -->
   </UPage>
 </template>

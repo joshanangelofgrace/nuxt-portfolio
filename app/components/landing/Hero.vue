@@ -9,13 +9,14 @@ defineProps<{
 </script>
 
 <template>
+  
   <UPageHero
-    class="-mt-16"
+    class="-mt-16 -mb-32"
     :orientation="'horizontal'"
     :ui="{
       headline: 'flex text-4xl',
       title: 'text-shadow-md max-w-xl mx-auto lg:text-6xl',
-      links: 'mt-4 flex-col justify-center items-center'
+      links: '-mt-4 flex-col'
     }"
   >
     <template #headline>
@@ -105,9 +106,8 @@ defineProps<{
       >
         <div
           v-if="page.hero.links"
-          class="flex items-center gap-2"
+          class="flex"
         >
-          <UButton v-bind="page.hero.links[0]" />
           <UButton
             :color="global.available ? 'success' : 'error'"
             variant="ghost"
@@ -130,6 +130,57 @@ defineProps<{
           </UButton>
         </div>
       </Motion>
+
+      <div class="gap-4 flex mt-4">
+        <Motion
+          :initial="{
+            scale: 1.1,
+            opacity: 0,
+            filter: 'blur(20px)'
+          }"
+          :animate="{
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)'
+          }"
+          :transition="{
+            duration: 0.6,
+            delay: 0.6
+          }"
+        >
+          <UButton
+            :color="'neutral'"
+            variant="outline"
+            class="gap-2"
+            :to="global.available ? global.meetingLink : ''"
+            label="Book an IT Support Session"
+          />
+        </Motion>
+        <Motion
+          :initial="{
+            scale: 1.1,
+            opacity: 0,
+            filter: 'blur(20px)'
+          }"
+          :animate="{
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)'
+          }"
+          :transition="{
+            duration: 0.6,
+            delay: 0.6
+          }"
+        >
+          <UButton
+            :color="'neutral'"
+            variant="outline"
+            class="gap-2"
+            :to="global.available ? global.meetingLink : ''"
+            label="Discuss something else..."
+          />
+        </Motion>
+      </div>
 
       <div class="gap-x-4 inline-flex mt-4">
         <Motion
