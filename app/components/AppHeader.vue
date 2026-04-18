@@ -7,16 +7,17 @@ defineProps<{
 </script>
 
 <template>
-  <div class="fixed border-b border-b-gray-100 text-gray-400 w-full flex z-100">
+  <div class="fixed border-b border-b-gray-100 bg-white/90 text-gray-400 w-full flex z-100">
     <div class="flex m-auto">
-      <div
+      <a
         v-for="value in links"
         :key="value"
-        class="px-8 p-4 border-l-gray-100 border-r-gray-100 border-l border-r
-         hover:bg-green-100/50 hover:text-green-500 cursor-pointer"
+        :href="value.to"
+        class="px-8 p-4 border-l-gray-100 border-r-gray-100 border-l border-r cursor-pointer"
+        :class="['hover:text-' + value.colour, 'hover:bg-' + value.colour +'/10 ']"
       >
         {{ value.label }}
-      </div>
+      </a>
     </div>
     <!-- <UNavigationMenu
       :items="links"

@@ -9,6 +9,66 @@
   --font-serif: 'Instrument Serif', serif;
 }
 
+/*Safe linking...*/
+
+@media (hover: hover) {
+  .hover\:bg-green-600\/10 {
+    &:hover {
+        @media (hover: hover) {
+            background-color: color-mix(in oklab, var(--color-green-600) /* oklch(96.2% 0.044 156.743) = #dcfce7 */ 10%, transparent);
+        }
+    }
+  }
+
+  .hover\:bg-yellow-600\/10 {
+    &:hover {
+        @media (hover: hover) {
+            background-color: color-mix(in oklab, var(--color-yellow-600) /* oklch(96.2% 0.044 156.743) = #dcfce7 */ 10%, transparent);
+        }
+    }
+  }
+
+  .hover\:bg-cyan-600\/10 {
+    &:hover {
+        @media (hover: hover) {
+            background-color: color-mix(in oklab, var(--color-cyan-600) /* oklch(96.2% 0.044 156.743) = #dcfce7 */ 10%, transparent);
+        }
+    }
+  }
+
+  .hover\:bg-indigo-600\/10 {
+    &:hover {
+        @media (hover: hover) {
+            background-color: color-mix(in oklab, var(--color-indigo-600) /* oklch(96.2% 0.044 156.743) = #dcfce7 */ 10%, transparent);
+        }
+    }
+  }
+
+  .hover\:bg-rose-600\/10 {
+    &:hover {
+        @media (hover: hover) {
+            background-color: color-mix(in oklab, var(--color-rose-600) /* oklch(96.2% 0.044 156.743) = #dcfce7 */ 10%, transparent);
+        }
+    }
+  }
+
+  .hover\:text-green-600:hover {
+    color: var(--color-green-600);
+  }
+  .hover\:text-yellow-600:hover {
+    color: var(--color-yellow-600);
+  }
+  .hover\:text-cyan-600:hover {
+    color: var(--color-cyan-600);
+  }
+  .hover\:text-indigo-600:hover {
+    color: var(--color-indigo-600);
+  }
+  .hover\:text-rose-600:hover {
+    color: var(--color-rose-600);
+  }
+}
+
 :root {
   ::selection {
     color: #282a30;

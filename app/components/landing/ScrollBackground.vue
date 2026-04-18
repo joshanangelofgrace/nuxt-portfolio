@@ -1,53 +1,145 @@
 <script setup lang="ts">
-import scrollSvg from 'scroll-svg'
-
-
-
-onMounted(() => {
-  const svgPath = document.querySelector('#scroll-line') as SVGPathElement
-  //                                only for typescript  ^^^^^^^^^^^^^^^^^
-  const scrolledSvg = scrollSvg(svgPath)
-  scrolledSvg.animate()
-})
-
-onUnmounted(() => {
-  const svgPath = document.querySelector('#scroll-line') as SVGPathElement
-  //                                only for typescript  ^^^^^^^^^^^^^^^^^
-  const scrolledSvg = scrollSvg(svgPath)
-  scrolledSvg.stopAnimating()
-})
 </script>
 
 <template>
-  <section className="svg-section">
-    <svg
-      viewBox="0 0 476 927"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+  <section class="background absolute top-0 left-0 h-full w-full">
+    <div
+      v-for="(value) in 100"
+      :key="value"
+      class="circle-container"
     >
-      <path
-        id="scroll-line"
-        d="M238.458 4C238.458 4 240 28.1667 245 52.5C250 76.8333 276.758 123.7 369.958 160.5C407.458 175.307 455.501 200.5 464.501 258C468.444 283.193 462 334 424 366C390.211 394.454 302.972 416.847 238.458 436C142.458 464.5 121 471.14 65.5 516C46 531.762 18.5001 559 6.99998 605C-1.63757 639.55 11.4091 672 29 693.5C65 737.5 107.235 746.5 147.5 762.5C187.765 778.5 199 786.5 199 786.5C237.5 811 238.458 860.5 238.458 860.5V916.5"
-        stroke="url(#paint0_linear_2_3)"
-        strokeWidth="8"
-        strokeLinecap="round"
-      />
-      <defs>
-        <linearGradient
-          id="paint0_linear_2_3"
-          x1="199.027"
-          y1="-6.29894e-06"
-          x2="285.693"
-          y2="1203"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#F87D37" />
-          <stop
-            offset="1"
-            stopColor="#FBAA23"
-          />
-        </linearGradient>
-      </defs>
-    </svg>
+      <div class="cicle" />
+    </div>
   </section>
 </template>
+
+<style scoped lang="scss">
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.background {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+
+  mask-image: radial-gradient(
+    white 0%,
+    white 30%,
+    transparent 80%,
+    transparent
+  );
+}
+
+.circle-container {
+  $particleNum: 200;
+  $particleColor: lightgray;
+
+  position: absolute;
+  transform: translateY(-10vh);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  .circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    background-image: radial-gradient(circle,rgba(191, 166, 73, 0.9) 0%, rgba(235, 232, 218, 0.1) 20%, rgba(255, 255, 255, 0) 100%);
+
+    animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
+
+    @keyframes fade-frames {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scale-frames {
+      0% {
+        transform: scale3d(0.4, 0.4, 1);
+      }
+
+      50% {
+        transform: scale3d(2.2, 2.2, 1);
+      }
+
+      100% {
+        transform: scale3d(0.4, 0.4, 1);
+      }
+    }
+
+      width: 2px;
+      height: 2px;
+
+      $startPositionY: random(10) + 100;
+      $framesName: "move-frames-" + $i;
+      $moveDuration: 28000 + random(9000) + ms;
+
+      animation-name: #{$framesName};
+      animation-duration: $moveDuration;
+      animation-delay: random(37000) + ms;
+
+      @keyframes #{$framesName} {
+        from {
+          transform: translate3d(random(100) + vw, $startPositionY + vh, 0);
+        }
+
+        to {
+          transform: translate3d(random(100) + vw, -$startPositionY - random(30) + vh, 0);
+        }
+      }
+
+      .circle {
+        animation-delay: random(4000) + ms;
+      }
+  }
+
+  $particleBaseSize: 8;
+
+  @for $i from 1 through $particleNum {
+    &:nth-child(#{$i}) {
+      $circleSize: random($particleBaseSize);
+      width: $circleSize + px;
+      height: $circleSize + px;
+
+      $startPositionY: random(10) + 100;
+      $framesName: "move-frames-" + $i;
+      $moveDuration: 28000 + random(9000) + ms;
+
+      animation-name: #{$framesName};
+      animation-duration: $moveDuration;
+      animation-delay: random(37000) + ms;
+
+      @keyframes #{$framesName} {
+        from {
+          transform: translate3d(random(100) + vw, $startPositionY + vh, 0);
+        }
+
+        to {
+          transform: translate3d(random(100) + vw, -$startPositionY - random(30) + vh, 0);
+        }
+      }
+
+      .circle {
+        animation-delay: random(4000) + ms;
+      }
+    }
+  }
+}
+</style>

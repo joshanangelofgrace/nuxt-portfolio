@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ScrollBackground from '~/components/landing/ScrollBackground.vue';
+
 const { data: page } = await useAsyncData('index', () => {
   return queryCollection('index').first()
 })
@@ -20,22 +22,25 @@ useSeoMeta({
 
 <template>
   <UPage v-if="page">
-    <LandingHero :page />
-    <!-- <LandingBlog :page /> -->
-    <!-- <UPageSection
-      :ui="{
-        container: '!pt-0 lg:grid lg:grid-cols-2 lg:gap-8'
-      }"
-    >
-      <LandingAbout :page />
-      <LandingWorkExperience :page />
-    </UPageSection>
-    <LandingBlog :page />
-    <LandingTestimonials :page />
-    <LandingFAQ :page /> -->
-
-    <!-- <ClientOnly>
+    <ClientOnly>
+      <!-- <div class="absolute top-0 left-0 w-full h-full">
+        <DotGrid
+          :dot-size="4"
+          :gap="28"
+          base-color="#e2e8f0"
+          active-color="#ffd6a8"
+          :proximity="75"
+          :speed-trigger="100"
+          :shock-radius="250"
+          :shock-strength="5"
+          :max-speed="5000"
+          :resistance="750"
+          :return-duration="1.5"
+          class-name="custom-dot-grid"
+        />
+      </div> -->
       <ScrollBackground />
-    </ClientOnly> -->
+    </ClientOnly>
+    <LandingHero :page />
   </UPage>
 </template>

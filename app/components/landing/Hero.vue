@@ -1,7 +1,15 @@
+use client
 <script setup lang="ts">
 import type { IndexCollectionItem } from '@nuxt/content'
+import ShinyText from '../ShinyText.vue'
 
 const { footer, global } = useAppConfig()
+
+const startTitleAnimation = ref(false)
+
+onMounted(() => {
+  setTimeout(() => startTitleAnimation.value = true, 2000)
+})
 
 defineProps<{
   page: IndexCollectionItem
@@ -9,7 +17,6 @@ defineProps<{
 </script>
 
 <template>
-  
   <UPageHero
     class="-mt-16 -mb-32"
     :orientation="'horizontal'"
@@ -35,7 +42,8 @@ defineProps<{
           duration: 0.6,
           delay: 0.1
         }"
-      > Meet
+      >
+        Meet
         <!-- <UColorModeAvatar
           class="size-18 ring ring-default ring-offset-3 ring-offset-bg"
           :light="global.picture?.light!"
@@ -62,7 +70,20 @@ defineProps<{
           delay: 0.2
         }"
       >
-        {{ page.title }}
+        <ClientOnly>
+          <ShinyText
+            :text="page.title"
+            :speed="4"
+            :delay="1"
+            :disabled="!startTitleAnimation"
+            :color="'#000'"
+            :shine-color="'#efefef'"
+            :spread="100"
+            :direction="'left'"
+            :yoyo="true"
+            :pause-on-hover="false"
+          />
+        </ClientOnly>
       </Motion>
     </template>
 
