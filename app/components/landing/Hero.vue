@@ -1,4 +1,3 @@
-use client
 <script setup lang="ts">
 import type { IndexCollectionItem } from '@nuxt/content'
 import ShinyText from '../ShinyText.vue'
@@ -17,16 +16,9 @@ defineProps<{
 </script>
 
 <template>
-  <UPageHero
-    class="-mt-16 -mb-32"
-    :orientation="'horizontal'"
-    :ui="{
-      headline: 'flex text-4xl',
-      title: 'text-shadow-md max-w-xl mx-auto lg:text-6xl',
-      links: '-mt-4 flex-col'
-    }"
-  >
-    <template #headline>
+  <div class="flex h-[calc(100vh)] w-full items-center">
+    <div class="flex-1 flex flex-col gap-1 ml-2 sm:ml-6 md:ml-24">
+      <!-- title -->
       <Motion
         :initial="{
           scale: 1.1,
@@ -43,17 +35,11 @@ defineProps<{
           delay: 0.1
         }"
       >
-        Meet
-        <!-- <UColorModeAvatar
-          class="size-18 ring ring-default ring-offset-3 ring-offset-bg"
-          :light="global.picture?.light!"
-          :dark="global.picture?.dark!"
-          :alt="global.picture?.alt!"
-        /> -->
+        <div class="flex text-2xl lg:text-4xl">
+          Meet
+        </div>
       </Motion>
-    </template>
-
-    <template #title>
+      <!-- header -->
       <Motion
         :initial="{
           scale: 1.1,
@@ -70,24 +56,24 @@ defineProps<{
           delay: 0.2
         }"
       >
-        <ClientOnly>
-          <ShinyText
-            :text="page.title"
-            :speed="4"
-            :delay="1"
-            :disabled="!startTitleAnimation"
-            :color="'#000'"
-            :shine-color="'#efefef'"
-            :spread="100"
-            :direction="'left'"
-            :yoyo="true"
-            :pause-on-hover="false"
-          />
-        </ClientOnly>
+        <div class="text-shadow-md max-w-xl text-4xl lg:text-6xl">
+          <ClientOnly>
+            <ShinyText
+              :text="page.title"
+              :speed="4"
+              :delay="1"
+              :disabled="!startTitleAnimation"
+              :color="'#000'"
+              :shine-color="'#efefef'"
+              :spread="100"
+              :direction="'left'"
+              :yoyo="true"
+              :pause-on-hover="false"
+            />
+          </ClientOnly>
+        </div>
       </Motion>
-    </template>
-
-    <template #description>
+      <!-- description -->
       <Motion
         :initial="{
           scale: 1.1,
@@ -104,11 +90,11 @@ defineProps<{
           delay: 0.3
         }"
       >
-        {{ page.description }}
+        <div class="text-xs lg:text-base">
+          {{ page.description }}
+        </div>
       </Motion>
-    </template>
-
-    <template #links>
+      <!-- links -->
       <Motion
         :initial="{
           scale: 1.1,
@@ -176,8 +162,16 @@ defineProps<{
             :to="global.available ? global.meetingLink : ''"
             label="Book an IT Support Session"
           />
+          <StarBorder
+            as="div"
+            color="black"
+            :speed="'6s'"
+            :thickness="1"
+          >
+            Star Border
+          </StarBorder>
         </Motion>
-        <Motion
+        <!-- <Motion
           :initial="{
             scale: 1.1,
             opacity: 0,
@@ -200,7 +194,7 @@ defineProps<{
             :to="global.available ? global.meetingLink : ''"
             label="Discuss something else..."
           />
-        </Motion>
+        </Motion> -->
       </div>
 
       <div class="gap-x-4 inline-flex mt-4">
@@ -228,56 +222,31 @@ defineProps<{
           />
         </Motion>
       </div>
-    </template>
-
-    <Motion
-      :initial="{
-        scale: 1.1,
-        opacity: 0,
-        filter: 'blur(20px)'
-      }"
-      :animate="{
-        scale: 1,
-        opacity: 1,
-        filter: 'blur(0px)'
-      }"
-      :transition="{
-        duration: 0.6,
-        delay: 0.1
-      }"
-    >
-      <NuxtImg src="/FLW_5740-1.webp" />
-    </Motion>
-    <!-- <UMarquee
-      pause-on-hover
-      class="py-2 -mx-8 sm:-mx-12 lg:-mx-16 [--duration:40s]"
-    >
-      <Motion
-        v-for="(img, index) in page.hero.images"
-        :key="index"
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: index * 0.1
-        }"
-      >
-        <NuxtImg
-          width="234"
-          height="234"
-          class="rounded-lg aspect-square object-cover"
-          :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
-          v-bind="img"
-        />
-      </Motion>
-    </UMarquee> -->
-  </UPageHero>
+    </div>
+    <div class="flex-1 flex">
+      <div class="absolute top-0 right-0 w-auto">
+        <Motion
+          :initial="{
+            scale: 1.1,
+            opacity: 0,
+            filter: 'blur(20px)'
+          }"
+          :animate="{
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)'
+          }"
+          :transition="{
+            duration: 0.6,
+            delay: 0.1
+          }"
+        >
+          <NuxtImg
+            class="w-auto h-[calc(100vh)] object-cover"
+            src="/FLW_5740-1.webp"
+          />
+        </Motion>
+      </div>
+    </div>
+  </div>
 </template>
